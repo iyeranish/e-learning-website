@@ -1,0 +1,97 @@
+<% layout('./layout/boilerplate') -%>
+
+<div class="px-5 py-5">
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title"><%=course.title%></h2>
+                <h4 class="card-subtitle"><%=course.tutor %></h4>
+            
+                <p class="card-text"><%=course.description %></p>
+                
+
+                    <form action="/classes/<%=course._id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+    
+                    <form action="" method="POST" class="d-inline">
+                        <button class="btn btn-success">Enroll</button>
+                    </form>
+
+
+                    <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Add new lesson
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Add new Lesson</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/classes/<%=course._id %>/lessons" method="POST" id="new-lesson">
+                                        
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingPassword" name="lesson[previousLesson]">
+                                            <label for="floatingPassword">Previous Lesson Title</label>
+                                          </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput" name="lesson[title]">
+                                            <label for="floatingInput">Title</label>
+                                          </div>
+                                          <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingPassword" name="lesson[lessonUrl]">
+                                            <label for="floatingPassword">Lesson Url</label>
+                                          </div>
+                                      </form>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" form="new-lesson" formaction="/classes/<%=course._id %>/lessons" formmethod="POST">Add</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> 3cf7dcda8ae6c1bb903124be4d8650d89650fa12
+                </div>
+            </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-4">
+        <table class=" table table-bordered">
+            <tr>
+                <th>No.</th>
+                <th>Lesson</th>
+            </tr> 
+            <%let count=0 %>
+            <% for (let lesson of course.lessons){ %>
+                <tr>
+                    <td><%=  count %></td>
+                    <td><a href="<%= lesson.lessonUrl%>" target="_blank"><%=lesson.title %></a> 
+                        <form action="/classes/<%= course._id %>/lessons/<%= lesson._id %>?_method=Delete" method="post"  class="d-inline">
+                            <button class="btn btn-danger btn-sm" style="float:right;"><i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
+                        
+                </tr> 
+                <% count+=1 %> 
+                <% } %>  
+        </table>
+    </div>
+</div>
+
+</div>
+
+
+
